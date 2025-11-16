@@ -1,0 +1,72 @@
+3) how do I get the topic distirbution when using lda?
+
+To get the topic distribution for documents in an LDA model, you typically use a specific method provided by the library you are using, such as gensim or scikit-learn.
+
+Using Python Libraries
+Gensim
+In gensim, you use the get_document_topics method on your trained LdaModel instance. The input to this method should be the document in a bag-of-words (BoW) format.
+
+# 'lda_model' is your trained LdaModel instance
+# 'bow_corpus' is your corpus in bag-of-words format
+
+# Get topic distributions for the entire training corpus
+corpus_topic_distributions = [lda_model.get_document_topics(doc) for doc in bow_corpus]
+
+# To get the full distribution (including topics with very low probability), 
+# set the minimum_probability parameter to 0
+full_topic_distribution = lda_model.get_document_topics(some_doc_bow, minimum_probability=0.0)
+
+# The output for a single document is a list of tuples, e.g., [(topic_id, probability), ...]
+# You can convert this to a full vector/list if needed, where indices correspond to topic IDs.
+
+For more details, refer to the gensim documentation. 
+
+Conceptual Explanation
+The topic distribution is a fundamental output of an LDA model. It is a probabilistic vector for each document, indicating the proportion of each underlying topic present in that document. These probabilities sum to 1 for any given document. For example, a document might be 95% Topic 1 and 5% Topic 2. 
+
+How do I use countvectorizer to remove stop words?
+
+3) To remove stop words using CountVectorizer in scikit-learn, you can utilize the stop_words parameter during its initialization.
+
+Method 1: Using a predefined list of stop words (e.g., 'english')
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+documents = [
+    "This is a sample document about natural language processing.",
+    "Another document for testing stop word removal.",
+    "The quick brown fox jumps over the lazy dog."
+]
+
+# Initialize CountVectorizer with the 'english' stop word list
+vectorizer = CountVectorizer(stop_words='english')
+
+# Fit and transform the documents
+X = vectorizer.fit_transform(documents)
+
+# Print the vocabulary to see which words were kept
+print(vectorizer.get_feature_names_out())
+
+Method 2: Providing a custom list of stop words
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+documents = [
+    "This is a sample document about natural language processing.",
+    "Another document for testing stop word removal.",
+    "The quick brown fox jumps over the lazy dog."
+]
+
+# Define your custom list of stop words
+custom_stop_words = ["is", "a", "the", "this", "for", "about"]
+
+# Initialize CountVectorizer with your custom stop word list
+vectorizer = CountVectorizer(stop_words=custom_stop_words)
+
+# Fit and transform the documents
+X = vectorizer.fit_transform(documents)
+
+# Print the vocabulary to see which words were kept
+print(vectorizer.get_feature_names_out())
+
+In both methods, the CountVectorizer will automatically filter out the specified stop words before creating the vocabulary and counting word occurrences in your documents. The resulting X will be a sparse matrix where columns correspond to the non-stop words in your vocabulary.

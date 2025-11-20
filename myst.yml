@@ -12,3 +12,4 @@ project:
 
 site:
   title: "STAT 159/259 Project 2"
+  base_url: /proj02-group02/

@@ -70,3 +70,150 @@ X = vectorizer.fit_transform(documents)
 print(vectorizer.get_feature_names_out())
 
 In both methods, the CountVectorizer will automatically filter out the specified stop words before creating the vocabulary and counting word occurrences in your documents. The resulting X will be a sparse matrix where columns correspond to the non-stop words in your vocabulary.
+
+
+
+
+
+####
+why does my myst deployed page look like this
+
+Your page looks **exactly like a MyST site where the CSS, JS, and theme assets failed to load**.
+
+When that happens, GitHub Pages (or any static host) will still show the HTML, but **everything looks huge, unstyled, stacked, and broken**, exactly like your screenshot.
+
+This is almost always caused by one of the following:
+
+---
+
+# 1. **You deployed only `_build/html/index.html` but NOT the `_static/` folder**
+
+MyST builds a whole directory:
+
+```
+_build/html/
+    index.html
+    _static/
+    _images/
+    _sources/
+    searchindex.js
+    ...
+```
+
+If you deploy only the HTML files without `_static/`, your site loses:
+
+* CSS
+* JavaScript
+* icons
+* theme files
+
+→ Result: **unstyled page** (your screenshot).
+
+Fix:
+
+* Deploy **everything inside `_build/html`**, including hidden folders.
+
+---
+
+# 2. **Your deployment branch is wrong**
+
+For GitHub Pages:
+
+* If using `main` → put files in `docs/`
+* If using `gh-pages` → push `_build/html` to that branch
+
+You likely pushed only some files.
+
+Correct workflow:
+
+```
+make html
+cd _build/html
+git init
+git add .
+git commit -m "deploy"
+git push -f origin gh-pages
+```
+
+---
+
+# 3. **Your `_config.yml` has a broken `html_baseurl`**
+
+If you set something like:
+
+```
+html_baseurl: "/STAT159-Project2"
+```
+
+but your repo is actually named differently, your CSS paths break.
+
+Your browser is probably trying to load:
+
+```
+https://username.github.io/_static/css/theme.css   (404)
+```
+
+instead of:
+
+```
+https://username.github.io/repo-name/_static/css/theme.css
+```
+
+Fix:
+
+```
+html_baseurl: https://<username>.github.io/<repo-name>/
+```
+
+or **remove `html_baseurl` entirely** (best for GitHub Pages).
+
+---
+
+# 4. **You moved files after building**
+
+If you drag-and-drop files into GitHub → easy to accidentally break directory structure.
+
+Make sure GitHub Pages sees:
+
+```
+/index.html
+/_static/
+```
+
+on the same level.
+
+---
+
+# 5. **Your site is using absolute paths instead of relative paths**
+
+If `_static/...` is referenced like:
+
+```
+href="/_static/theme.css"
+```
+
+Note the leading **/** — this breaks on GitHub Pages.
+
+Correct MyST config:
+
+```
+html_use_modern_theme: true
+sphinx:
+  config:
+    html_static_path: ['_static']
+```
+
+---
+
+# What I need from you to confirm the cause
+
+Paste **your project structure** on the deployed branch.
+Run:
+
+```
+tree -L 2
+```
+
+or screenshot the folder layout of the deployed branch.
+
+I can tell you the exact fix in one message once I see that.

@@ -1,0 +1,15 @@
+version: 1
+
+project:
+  title: "STAT 159/259 Project 2"
+  toc:
+    - file: index.md
+    - file: project-description.md
+    - file: nlp-P01.ipynb
+    - file: nlp-P02.ipynb
+    - file: nlp-P03.ipynb
+    - file: nlp-P04.ipynb
+
+site:
+  title: "STAT 159/259 Project 2"
+    

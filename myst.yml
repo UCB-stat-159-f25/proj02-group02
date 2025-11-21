@@ -2,13 +2,23 @@ version: 1
 
 project:
   title: "STAT 159/259 Project 2"
+  authors:
+    - name: Marcel Angelo Daniel Gunadi
+    - name: Ethan Juan Chant
+    - name: Benson Chang
+    - name: Sophie Hanson
   toc:
     - file: index.md
-    - file: project-description.md
+      title: Overview
+#    - file: project-description.md
     - file: nlp-P01.ipynb
+      title: Part 1-Exploratory Analysis
     - file: nlp-P02.ipynb
+      title: Part 2-Simple Text Processing
     - file: nlp-P03.ipynb
+      title: Part 3-Advanced Text Processing
     - file: nlp-P04.ipynb
+      title: Part 4-Case Study
 
 site:
   title: "STAT 159/259 Project 2"

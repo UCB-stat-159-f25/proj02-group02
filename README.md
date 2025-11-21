@@ -5,3 +5,6 @@ This project explores State of the Union speeches to see how presidential langua
 
 You can run all notebooks using the Binder button here:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-f25/proj02-group02/main)  
+
+
+[View MyST site](https://ucb-stat-159-f25.github.io/proj02-group02/)

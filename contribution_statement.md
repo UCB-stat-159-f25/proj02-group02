@@ -1,4 +1,4 @@
-Marcel Angelo Daniel Gunadi: Completed part 3
+Marcel Angelo Daniel Gunadi: Completed part 3 and parts of part 2, did ai documentation 
 
 
 Ethan Juan Chant: Created Repo, Completed part 1, wrote readme description and added binder button and myst button, worked on site
